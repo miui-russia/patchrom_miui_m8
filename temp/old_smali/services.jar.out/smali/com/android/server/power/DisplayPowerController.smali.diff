@@ -1,0 +1,40 @@
+*** ./smali/com/android/server/power/DisplayPowerController.smali	2015-08-27 23:27:50.359028765 +0800
+--- /home/nian/patchrom/m7/temp/new_smali/services.jar.out/./smali/com/android/server/power/DisplayPowerController.smali	2015-08-27 23:29:20.443027565 +0800
+***************
+*** 2398,2404 ****
+  
+      iget-object v0, p0, Lcom/android/server/power/DisplayPowerController;->mElectronBeamOffAnimator:Landroid/animation/ObjectAnimator;
+  
+!     const-wide/16 v1, 0x190
+  
+      invoke-virtual {v0, v1, v2}, Landroid/animation/ObjectAnimator;->setDuration(J)Landroid/animation/ObjectAnimator;
+  
+--- 2398,2404 ----
+  
+      iget-object v0, p0, Lcom/android/server/power/DisplayPowerController;->mElectronBeamOffAnimator:Landroid/animation/ObjectAnimator;
+  
+!     const-wide/16 v1, 0x0
+  
+      invoke-virtual {v0, v1, v2}, Landroid/animation/ObjectAnimator;->setDuration(J)Landroid/animation/ObjectAnimator;
+  
+***************
+*** 2880,2887 ****
+  
+      invoke-virtual {v0}, Lcom/android/server/power/Notifier;->onScreenOn()V
+  
+-     :cond_0
+      :goto_0
+      return-void
+  
+      :cond_1
+--- 2880,2889 ----
+  
+      invoke-virtual {v0}, Lcom/android/server/power/Notifier;->onScreenOn()V
+  
+      :goto_0
++     invoke-static {p1}, Lcom/android/server/power/ButtonLightController;->setScreenOn(Z)V
++ 
++     :cond_0
+      return-void
+  
+      :cond_1

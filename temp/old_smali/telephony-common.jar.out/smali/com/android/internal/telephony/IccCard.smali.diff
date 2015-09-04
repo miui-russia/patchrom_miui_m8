@@ -1,0 +1,37 @@
+*** ./smali/com/android/internal/telephony/IccCard.smali	2015-08-27 23:28:01.739028613 +0800
+--- /home/nian/patchrom/m7/temp/new_smali/telephony-common.jar.out/./smali/com/android/internal/telephony/IccCard.smali	2015-08-27 23:29:29.635027443 +0800
+***************
+*** 70,75 ****
+--- 70,78 ----
+  .method public abstract registerForLocked(Landroid/os/Handler;ILjava/lang/Object;)V
+  .end method
+  
++ .method public abstract registerForNetworkLocked(Landroid/os/Handler;ILjava/lang/Object;)V
++ .end method
++ 
+  .method public abstract registerForPersoLocked(Landroid/os/Handler;ILjava/lang/Object;)V
+  .end method
+  
+***************
+*** 82,87 ****
+--- 85,93 ----
+  .method public abstract supplyDepersonalization(Ljava/lang/String;Ljava/lang/String;Landroid/os/Message;)V
+  .end method
+  
++ .method public abstract supplyNetworkDepersonalization(Ljava/lang/String;Landroid/os/Message;)V
++ .end method
++ 
+  .method public abstract supplyPin(Ljava/lang/String;Landroid/os/Message;)V
+  .end method
+  
+***************
+*** 100,104 ****
+--- 106,113 ----
+  .method public abstract unregisterForLocked(Landroid/os/Handler;)V
+  .end method
+  
++ .method public abstract unregisterForNetworkLocked(Landroid/os/Handler;)V
++ .end method
++ 
+  .method public abstract unregisterForPersoLocked(Landroid/os/Handler;)V
+  .end method

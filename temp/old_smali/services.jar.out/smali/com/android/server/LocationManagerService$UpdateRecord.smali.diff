@@ -1,0 +1,19 @@
+*** ./smali/com/android/server/LocationManagerService$UpdateRecord.smali	2015-08-27 23:27:54.687028707 +0800
+--- /home/nian/patchrom/m7/temp/new_smali/services.jar.out/./smali/com/android/server/LocationManagerService$UpdateRecord.smali	2015-08-27 23:29:23.935027519 +0800
+***************
+*** 9,15 ****
+  .end annotation
+  
+  .annotation system Ldalvik/annotation/InnerClass;
+!     accessFlags = 0x2
+      name = "UpdateRecord"
+  .end annotation
+  
+--- 9,15 ----
+  .end annotation
+  
+  .annotation system Ldalvik/annotation/InnerClass;
+!     accessFlags = 0x0
+      name = "UpdateRecord"
+  .end annotation
+  

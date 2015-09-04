@@ -1,0 +1,33 @@
+*** ./smali/android/app/ApplicationPackageManager.smali	2015-08-27 23:29:05.695027762 +0800
+--- /home/nian/patchrom/m7/temp/new_smali/framework.jar.out/./smali/android/app/ApplicationPackageManager.smali	2015-08-27 23:30:21.367026754 +0800
+***************
+*** 1466,1471 ****
+--- 1466,1480 ----
+      goto :goto_0
+  .end method
+  
++ .method getContext()Landroid/app/ContextImpl;
++     .locals 1
++ 
++     .prologue
++     iget-object v0, p0, Landroid/app/ApplicationPackageManager;->mContext:Landroid/app/ContextImpl;
++ 
++     return-object v0
++ .end method
++ 
+  .method public getDefaultActivityIcon()Landroid/graphics/drawable/Drawable;
+      .locals 2
+  
+***************
+*** 2676,2681 ****
+--- 2685,2694 ----
+      move-result-object v8
+  
+      .local v8, "r":Landroid/content/res/Resources;
++     iget-object v1, p1, Landroid/content/pm/ApplicationInfo;->packageName:Ljava/lang/String;
++ 
++     invoke-static {v8, v1}, Landroid/miui/ResourcesManager;->initMiuiResource(Landroid/content/res/Resources;Ljava/lang/String;)V
++ 
+      if-nez v8, :cond_0
+  
+      new-instance v0, Landroid/content/pm/PackageManager$NameNotFoundException;

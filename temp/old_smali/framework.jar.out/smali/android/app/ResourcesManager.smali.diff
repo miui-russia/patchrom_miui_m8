@@ -1,0 +1,44 @@
+*** ./smali/android/app/ResourcesManager.smali	2015-08-27 23:29:04.603027776 +0800
+--- /home/nian/patchrom/m7/temp/new_smali/framework.jar.out/./smali/android/app/ResourcesManager.smali	2015-08-27 23:30:19.955026773 +0800
+***************
+*** 1452,1457 ****
+--- 1452,1459 ----
+      or-int/lit16 v1, v1, 0xd00
+  
+      :cond_4
++     invoke-static {v1, p1}, Landroid/app/MiuiThemeHelper;->handleExtraConfigurationChanges(ILandroid/content/res/Configuration;)V
++ 
+      iget-object v12, p1, Landroid/content/res/Configuration;->locale:Ljava/util/Locale;
+  
+      if-eqz v12, :cond_5
+***************
+*** 2148,2161 ****
+      move-result v17
+  
+      :cond_7
+!     new-instance v8, Landroid/content/res/Resources;
+  
+      .end local v8    # "r":Landroid/content/res/Resources;
+      move-object/from16 v12, p6
+  
+      move-object/from16 v13, p7
+  
+!     invoke-direct/range {v8 .. v13}, Landroid/content/res/Resources;-><init>(Landroid/content/res/AssetManager;Landroid/util/DisplayMetrics;Landroid/content/res/Configuration;Landroid/content/res/CompatibilityInfo;Landroid/os/IBinder;)V
+  
+      .restart local v8    # "r":Landroid/content/res/Resources;
+      if-eqz v17, :cond_8
+--- 2150,2163 ----
+      move-result v17
+  
+      :cond_7
+!     new-instance v8, Landroid/content/res/MiuiResources;
+  
+      .end local v8    # "r":Landroid/content/res/Resources;
+      move-object/from16 v12, p6
+  
+      move-object/from16 v13, p7
+  
+!     invoke-direct/range {v8 .. v13}, Landroid/content/res/MiuiResources;-><init>(Landroid/content/res/AssetManager;Landroid/util/DisplayMetrics;Landroid/content/res/Configuration;Landroid/content/res/CompatibilityInfo;Landroid/os/IBinder;)V
+  
+      .restart local v8    # "r":Landroid/content/res/Resources;
+      if-eqz v17, :cond_8

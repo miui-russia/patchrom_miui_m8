@@ -1,0 +1,17 @@
+*** ./smali/android/graphics/drawable/NinePatchDrawable.smali	2015-08-27 23:28:40.547028096 +0800
+--- /home/nian/patchrom/m7/temp/new_smali/framework.jar.out/./smali/android/graphics/drawable/NinePatchDrawable.smali	2015-08-27 23:29:57.667027070 +0800
+***************
+*** 254,259 ****
+--- 254,265 ----
+  
+      iput-object v4, p0, Landroid/graphics/drawable/NinePatchDrawable;->mOpticalInsets:Landroid/graphics/Insets;
+  
++     iget-object v4, p0, Landroid/graphics/drawable/NinePatchDrawable;->mNinePatchState:Landroid/graphics/drawable/NinePatchDrawable$NinePatchState;
++ 
++     iget-object v4, v4, Landroid/graphics/drawable/NinePatchDrawable$NinePatchState;->mPadding:Landroid/graphics/Rect;
++ 
++     iput-object v4, p0, Landroid/graphics/drawable/NinePatchDrawable;->mPadding:Landroid/graphics/Rect;
++ 
+      :goto_0
+      return-void
+  

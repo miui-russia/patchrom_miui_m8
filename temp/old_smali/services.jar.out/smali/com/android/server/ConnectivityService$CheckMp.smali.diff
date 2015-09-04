@@ -1,0 +1,37 @@
+*** ./smali/com/android/server/ConnectivityService$CheckMp.smali	2015-08-27 23:27:57.583028668 +0800
+--- /home/nian/patchrom/m7/temp/new_smali/services.jar.out/./smali/com/android/server/ConnectivityService$CheckMp.smali	2015-08-27 23:29:26.163027489 +0800
+***************
+*** 2118,2123 ****
+--- 2118,2139 ----
+      goto/16 :goto_0
+  
+      :cond_1e
++     const/16 v35, 0xc8
++ 
++     move/from16 v0, v28
++ 
++     move/from16 v1, v35
++ 
++     if-lt v0, v1, :cond_miui_0
++ 
++     const/16 v35, 0x18f
++ 
++     move/from16 v0, v28
++ 
++     move/from16 v1, v35
++ 
++     if-gt v0, v1, :cond_miui_0
++ 
+      :try_start_18
+      new-instance v35, Ljava/lang/StringBuilder;
+  
+***************
+*** 2152,2157 ****
+--- 2168,2174 ----
+  
+      move-result-object v29
+  
++     :cond_miui_0
+      move v6, v5
+  
+      .end local v5    # "addrTried":I

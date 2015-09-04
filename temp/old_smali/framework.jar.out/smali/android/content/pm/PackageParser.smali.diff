@@ -1,0 +1,36 @@
+*** ./smali/android/content/pm/PackageParser.smali	2015-08-27 23:28:11.243028486 +0800
+--- /home/nian/patchrom/m7/temp/new_smali/framework.jar.out/./smali/android/content/pm/PackageParser.smali	2015-08-27 23:29:36.271027354 +0800
+***************
+*** 17261,17267 ****
+      .local v22, "cookie":I
+      if-eqz v22, :cond_5
+  
+!     new-instance v31, Landroid/content/res/Resources;
+  
+      const/4 v3, 0x0
+  
+--- 17261,17267 ----
+      .local v22, "cookie":I
+      if-eqz v22, :cond_5
+  
+!     new-instance v31, Landroid/content/res/MiuiResources;
+  
+      const/4 v3, 0x0
+  
+***************
+*** 17269,17275 ****
+  
+      move-object/from16 v1, p3
+  
+!     invoke-direct {v0, v2, v1, v3}, Landroid/content/res/Resources;-><init>(Landroid/content/res/AssetManager;Landroid/util/DisplayMetrics;Landroid/content/res/Configuration;)V
+      :try_end_1
+      .catch Ljava/lang/Exception; {:try_start_1 .. :try_end_1} :catch_2
+  
+--- 17269,17275 ----
+  
+      move-object/from16 v1, p3
+  
+!     invoke-direct {v0, v2, v1, v3}, Landroid/content/res/MiuiResources;-><init>(Landroid/content/res/AssetManager;Landroid/util/DisplayMetrics;Landroid/content/res/Configuration;)V
+      :try_end_1
+      .catch Ljava/lang/Exception; {:try_start_1 .. :try_end_1} :catch_2
+  

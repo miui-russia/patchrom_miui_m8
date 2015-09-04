@@ -1,0 +1,21 @@
+*** ./smali/android/telephony/SmsManager.smali	2015-08-27 23:28:05.631028561 +0800
+--- /home/nian/patchrom/m7/temp/new_smali/telephony-common.jar.out/./smali/android/telephony/SmsManager.smali	2015-08-27 23:29:32.327027407 +0800
+***************
+*** 227,232 ****
+--- 227,242 ----
+      goto :goto_0
+  .end method
+  
++ .method public static getDefault(I)Landroid/telephony/SmsManager;
++     .locals 1
++     .param p0, "slotId"    # I
++ 
++     .prologue
++     sget-object v0, Landroid/telephony/SmsManager;->sInstance:Landroid/telephony/SmsManager;
++ 
++     return-object v0
++ .end method
++ 
+  
+  # virtual methods
+  .method public copyMessageToIcc([B[BI)Z

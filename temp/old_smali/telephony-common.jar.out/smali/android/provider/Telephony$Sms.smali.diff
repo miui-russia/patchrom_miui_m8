@@ -1,0 +1,36 @@
+*** ./smali/android/provider/Telephony$Sms.smali	2015-08-27 23:28:05.919028557 +0800
+--- /home/nian/patchrom/m7/temp/new_smali/telephony-common.jar.out/./smali/android/provider/Telephony$Sms.smali	2015-08-27 23:29:32.511027405 +0800
+***************
+*** 278,291 ****
+  
+      invoke-static {v1, v2}, Landroid/telephony/Rlog;->v(Ljava/lang/String;Ljava/lang/String;)I
+  
+-     const-string v1, "sub_id"
+- 
+-     invoke-static {p10}, Ljava/lang/Integer;->valueOf(I)Ljava/lang/Integer;
+- 
+-     move-result-object v2
+- 
+-     invoke-virtual {v0, v1, v2}, Landroid/content/ContentValues;->put(Ljava/lang/String;Ljava/lang/Integer;)V
+- 
+      const-string v1, "address"
+  
+      invoke-virtual {v0, v1, p2}, Landroid/content/ContentValues;->put(Ljava/lang/String;Ljava/lang/String;)V
+--- 278,283 ----
+***************
+*** 318,331 ****
+  
+      invoke-virtual {v0, v1, p3}, Landroid/content/ContentValues;->put(Ljava/lang/String;Ljava/lang/String;)V
+  
+-     const-string v1, "pri"
+- 
+-     invoke-static {p11}, Ljava/lang/Integer;->valueOf(I)Ljava/lang/Integer;
+- 
+-     move-result-object v2
+- 
+-     invoke-virtual {v0, v1, v2}, Landroid/content/ContentValues;->put(Ljava/lang/String;Ljava/lang/Integer;)V
+- 
+      if-eqz p7, :cond_1
+  
+      const-string v1, "status"
+--- 310,315 ----

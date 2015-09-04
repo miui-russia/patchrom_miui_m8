@@ -1,0 +1,114 @@
+*** ./smali/android/app/Notification.smali	2015-08-27 23:29:05.543027764 +0800
+--- /home/nian/patchrom/m7/temp/new_smali/framework.jar.out/./smali/android/app/Notification.smali	2015-08-27 23:30:21.167026757 +0800
+***************
+*** 141,146 ****
+--- 141,148 ----
+  
+  .field public deleteIntent:Landroid/app/PendingIntent;
+  
++ .field public extraNotification:Landroid/app/MiuiNotification;
++ 
+  .field public extras:Landroid/os/Bundle;
+  
+  .field public flags:I
+***************
+*** 196,201 ****
+--- 198,209 ----
+      .prologue
+      invoke-direct {p0}, Ljava/lang/Object;-><init>()V
+  
++     new-instance v0, Landroid/app/MiuiNotification;
++ 
++     invoke-direct {v0}, Landroid/app/MiuiNotification;-><init>()V
++ 
++     iput-object v0, p0, Landroid/app/Notification;->extraNotification:Landroid/app/MiuiNotification;
++ 
+      const/4 v0, -0x1
+  
+      iput v0, p0, Landroid/app/Notification;->audioStreamType:I
+***************
+*** 230,235 ****
+--- 238,249 ----
+      .prologue
+      invoke-direct {p0}, Ljava/lang/Object;-><init>()V
+  
++     new-instance v0, Landroid/app/MiuiNotification;
++ 
++     invoke-direct {v0}, Landroid/app/MiuiNotification;-><init>()V
++ 
++     iput-object v0, p0, Landroid/app/Notification;->extraNotification:Landroid/app/MiuiNotification;
++ 
+      const/4 v0, -0x1
+  
+      iput v0, p0, Landroid/app/Notification;->audioStreamType:I
+***************
+*** 264,269 ****
+--- 278,289 ----
+  
+      invoke-direct {p0}, Ljava/lang/Object;-><init>()V
+  
++     new-instance v0, Landroid/app/MiuiNotification;
++ 
++     invoke-direct {v0}, Landroid/app/MiuiNotification;-><init>()V
++ 
++     iput-object v0, p0, Landroid/app/Notification;->extraNotification:Landroid/app/MiuiNotification;
++ 
+      const/4 v0, -0x1
+  
+      iput v0, p0, Landroid/app/Notification;->audioStreamType:I
+***************
+*** 296,301 ****
+--- 316,327 ----
+      .prologue
+      invoke-direct {p0}, Ljava/lang/Object;-><init>()V
+  
++     new-instance v1, Landroid/app/MiuiNotification;
++ 
++     invoke-direct {v1}, Landroid/app/MiuiNotification;-><init>()V
++ 
++     iput-object v1, p0, Landroid/app/Notification;->extraNotification:Landroid/app/MiuiNotification;
++ 
+      const/4 v1, -0x1
+  
+      iput v1, p0, Landroid/app/Notification;->audioStreamType:I
+***************
+*** 558,563 ****
+--- 584,593 ----
+      iput-object v1, p0, Landroid/app/Notification;->bigContentView:Landroid/widget/RemoteViews;
+  
+      :cond_8
++     iget-object v1, p0, Landroid/app/Notification;->extraNotification:Landroid/app/MiuiNotification;
++ 
++     invoke-virtual {v1, p1}, Landroid/app/MiuiNotification;->readFromParcel(Landroid/os/Parcel;)V
++ 
+      return-void
+  .end method
+  
+***************
+*** 925,930 ****
+--- 955,966 ----
+      invoke-virtual {p1}, Landroid/app/Notification;->lightenPayload()V
+  
+      :cond_9
++     iget-object v7, p1, Landroid/app/Notification;->extraNotification:Landroid/app/MiuiNotification;
++ 
++     iget-object v8, p0, Landroid/app/Notification;->extraNotification:Landroid/app/MiuiNotification;
++ 
++     invoke-virtual {v7, v8}, Landroid/app/MiuiNotification;->setTo(Landroid/app/MiuiNotification;)V
++ 
+      return-void
+  .end method
+  
+***************
+*** 1548,1553 ****
+--- 1584,1593 ----
+      invoke-virtual {v0, p1, v2}, Landroid/widget/RemoteViews;->writeToParcel(Landroid/os/Parcel;I)V
+  
+      :goto_8
++     iget-object v0, p0, Landroid/app/Notification;->extraNotification:Landroid/app/MiuiNotification;
++ 
++     invoke-virtual {v0, p1, p2}, Landroid/app/MiuiNotification;->writeToParcel(Landroid/os/Parcel;I)V
++ 
+      return-void
+  
+      :cond_0

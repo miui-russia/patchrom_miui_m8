@@ -1,0 +1,26 @@
+*** ./smali/com/android/internal/telephony/IccCardConstants$State.smali	2015-08-27 23:29:08.391027726 +0800
+--- /home/nian/patchrom/m7/temp/new_smali/framework2.jar.out/./smali/com/android/internal/telephony/IccCardConstants$State.smali	2015-08-27 23:30:25.487026699 +0800
+***************
+*** 32,37 ****
+--- 32,39 ----
+  
+  .field public static final enum DETECTED:Lcom/android/internal/telephony/IccCardConstants$State;
+  
++ .field public static final NETWORK_LOCKED:Lcom/android/internal/telephony/IccCardConstants$State;
++ 
+  .field public static final enum NOT_READY:Lcom/android/internal/telephony/IccCardConstants$State;
+  
+  .field public static final enum PERM_DISABLED:Lcom/android/internal/telephony/IccCardConstants$State;
+***************
+*** 208,213 ****
+--- 210,219 ----
+  
+      sput-object v0, Lcom/android/internal/telephony/IccCardConstants$State;->$VALUES:[Lcom/android/internal/telephony/IccCardConstants$State;
+  
++     sget-object v0, Lcom/android/internal/telephony/IccCardConstants$State;->PERSO_LOCKED:Lcom/android/internal/telephony/IccCardConstants$State;
++ 
++     sput-object v0, Lcom/android/internal/telephony/IccCardConstants$State;->NETWORK_LOCKED:Lcom/android/internal/telephony/IccCardConstants$State;
++ 
+      return-void
+  .end method
+  

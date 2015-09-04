@@ -1,0 +1,19 @@
+*** ./smali/android/view/LayoutInflater.smali	2015-08-27 23:28:26.295028286 +0800
+--- /home/nian/patchrom/m7/temp/new_smali/framework.jar.out/./smali/android/view/LayoutInflater.smali	2015-08-27 23:29:46.723027215 +0800
+***************
+*** 1535,1540 ****
+--- 1535,1548 ----
+  
+      move-result-object v1
+  
++     invoke-static {v1, p1}, Landroid/view/LayoutInflaterMap;->getResourceId(Landroid/content/Context;I)I
++ 
++     move-result p1
++ 
++     invoke-virtual {p0}, Landroid/view/LayoutInflater;->getContext()Landroid/content/Context;
++ 
++     move-result-object v1
++ 
+      invoke-virtual {v1}, Landroid/content/Context;->getResources()Landroid/content/res/Resources;
+  
+      move-result-object v1

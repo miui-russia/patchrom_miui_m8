@@ -1,0 +1,55 @@
+*** ./smali/android/media/MediaScanner$MyMediaScannerClient.smali	2015-08-27 23:28:16.543028416 +0800
+--- /home/nian/patchrom/m7/temp/new_smali/framework.jar.out/./smali/android/media/MediaScanner$MyMediaScannerClient.smali	2015-08-27 23:29:40.003027305 +0800
+***************
+*** 3573,3579 ****
+  
+      move-result v0
+  
+!     if-eqz v0, :cond_0
+  
+      const-string v0, "video"
+  
+--- 3573,3579 ----
+  
+      move-result v0
+  
+!     if-eqz v0, :cond_1
+  
+      const-string v0, "video"
+  
+***************
+*** 3581,3592 ****
+  
+      move-result v0
+  
+!     if-eqz v0, :cond_0
+  
+      :goto_0
+      return-void
+  
+!     :cond_0
+      iput-object p1, p0, Landroid/media/MediaScanner$MyMediaScannerClient;->mMimeType:Ljava/lang/String;
+  
+      invoke-static {p1}, Landroid/media/MediaFile;->getFileTypeForMimeType(Ljava/lang/String;)I
+--- 3581,3601 ----
+  
+      move-result v0
+  
+!     if-eqz v0, :cond_1
+  
++     :cond_0
+      :goto_0
+      return-void
+  
+!     :cond_1
+!     iget-object v0, p0, Landroid/media/MediaScanner$MyMediaScannerClient;->mMimeType:Ljava/lang/String;
+! 
+!     invoke-static {v0, p1}, Landroid/media/MediaScannerInjector;->keepMimeType(Ljava/lang/String;Ljava/lang/String;)Z
+! 
+!     move-result v0
+! 
+!     if-nez v0, :cond_0
+! 
+      iput-object p1, p0, Landroid/media/MediaScanner$MyMediaScannerClient;->mMimeType:Ljava/lang/String;
+  
+      invoke-static {p1}, Landroid/media/MediaFile;->getFileTypeForMimeType(Ljava/lang/String;)I

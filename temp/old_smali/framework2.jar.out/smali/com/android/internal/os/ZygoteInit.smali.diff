@@ -1,0 +1,40 @@
+*** ./smali/com/android/internal/os/ZygoteInit.smali	2015-08-27 23:29:12.375027673 +0800
+--- /home/nian/patchrom/m7/temp/new_smali/framework2.jar.out/./smali/com/android/internal/os/ZygoteInit.smali	2015-08-27 23:30:30.759026629 +0800
+***************
+*** 455,460 ****
+--- 455,462 ----
+      :try_start_0
+      invoke-static {}, Lcom/android/internal/os/SamplingProfilerIntegration;->start()V
+  
++     invoke-static {}, Lmiui/security/SecurityManager;->init()V
++ 
+      invoke-static {}, Lcom/android/internal/os/ZygoteInit;->registerZygoteSocket()V
+  
+      const/16 v2, 0xbcc
+***************
+*** 1248,1253 ****
+--- 1250,1262 ----
+      return v0
+  .end method
+  
++ .method private static preloadMiuiResources()V
++     .locals 0
++ 
++     .prologue
++     return-void
++ .end method
++ 
+  .method private static preloadOpenGL()V
+      .locals 2
+  
+***************
+*** 1290,1295 ****
+--- 1299,1306 ----
+  
+      sget-object v2, Lcom/android/internal/os/ZygoteInit;->mResources:Landroid/content/res/Resources;
+  
++     invoke-static {}, Lcom/android/internal/os/ZygoteInit;->preloadMiuiResources()V
++ 
+      invoke-virtual {v2}, Landroid/content/res/Resources;->finishPreloading()V
+      :try_end_0
+      .catch Ljava/lang/RuntimeException; {:try_start_0 .. :try_end_0} :catch_0

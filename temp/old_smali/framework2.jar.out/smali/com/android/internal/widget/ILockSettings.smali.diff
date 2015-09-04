@@ -1,0 +1,19 @@
+*** ./smali/com/android/internal/widget/ILockSettings.smali	2015-08-27 23:29:11.679027682 +0800
+--- /home/nian/patchrom/m7/temp/new_smali/framework2.jar.out/./smali/com/android/internal/widget/ILockSettings.smali	2015-08-27 23:30:29.687026643 +0800
+***************
+*** 119,124 ****
+--- 119,132 ----
+      .end annotation
+  .end method
+  
++ .method public abstract setRawLockPassword([BI)V
++     .annotation system Ldalvik/annotation/Throws;
++         value = {
++             Landroid/os/RemoteException;
++         }
++     .end annotation
++ .end method
++ 
+  .method public abstract setString(Ljava/lang/String;Ljava/lang/String;I)V
+      .annotation system Ldalvik/annotation/Throws;
+          value = {

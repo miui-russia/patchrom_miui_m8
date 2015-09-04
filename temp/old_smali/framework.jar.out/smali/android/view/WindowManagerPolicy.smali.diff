@@ -1,0 +1,14 @@
+*** ./smali/android/view/WindowManagerPolicy.smali	2015-08-27 23:28:27.203028274 +0800
+--- /home/nian/patchrom/m7/temp/new_smali/framework.jar.out/./smali/android/view/WindowManagerPolicy.smali	2015-08-27 23:29:47.427027206 +0800
+***************
+*** 260,265 ****
+--- 260,268 ----
+  .method public abstract needsNavigationBar()Z
+  .end method
+  
++ .method public abstract notifyBackLidSwitchChanged(JZ)V
++ .end method
++ 
+  .method public abstract notifyLidSwitchChanged(JZ)V
+  .end method
+  

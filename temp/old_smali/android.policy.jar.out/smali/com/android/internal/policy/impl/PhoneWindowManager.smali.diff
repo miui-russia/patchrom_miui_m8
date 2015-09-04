@@ -1,0 +1,326 @@
+*** ./smali/com/android/internal/policy/impl/PhoneWindowManager.smali	2015-08-27 23:28:07.443028537 +0800
+--- /home/nian/patchrom/m7/temp/new_smali/android.policy.jar.out/./smali/com/android/internal/policy/impl/PhoneWindowManager.smali	2015-08-27 23:29:33.571027390 +0800
+***************
+*** 200,205 ****
+--- 200,207 ----
+  
+  .field mCameraWakeScreen:Z
+  
++ .field private mButtonLightEnabled:Z
++ 
+  .field mCanHideNavigationBar:Z
+  
+  .field mCarDockEnablesAccelerometer:Z
+***************
+*** 317,323 ****
+  
+  .field mForcingShowNavBarLayer:I
+  
+! .field mGlobalActions:Lcom/android/internal/policy/impl/GlobalActions;
+  
+  .field private mGlobalKeyManager:Lcom/android/internal/policy/impl/GlobalKeyManager;
+  
+--- 319,325 ----
+  
+  .field mForcingShowNavBarLayer:I
+  
+! .field mGlobalActions:Lcom/android/internal/policy/impl/MiuiGlobalActions;
+  
+  .field private mGlobalKeyManager:Lcom/android/internal/policy/impl/GlobalKeyManager;
+  
+***************
+*** 401,407 ****
+  
+  .field mLidState:I
+  
+! .field private final mLock:Ljava/lang/Object;
+  
+  .field mLockScreenTimeout:I
+  
+--- 403,409 ----
+  
+  .field mLidState:I
+  
+! .field final mLock:Ljava/lang/Object;
+  
+  .field mLockScreenTimeout:I
+  
+***************
+*** 475,481 ****
+  
+  .field private mPowerKeyTriggered:Z
+  
+! .field private final mPowerLongPress:Ljava/lang/Runnable;
+  
+  .field mPowerManager:Landroid/os/PowerManager;
+  
+--- 477,483 ----
+  
+  .field private mPowerKeyTriggered:Z
+  
+! .field private mPowerLongPress:Ljava/lang/Runnable;
+  
+  .field mPowerManager:Landroid/os/PowerManager;
+  
+***************
+*** 820,825 ****
+--- 822,833 ----
+  
+      invoke-direct {v0}, Ljava/lang/Object;-><init>()V
+  
++     iput-object v0, p0, Lcom/android/internal/policy/impl/PhoneWindowManager;->mQuickBootLock:Ljava/lang/Object;
++ 
++     new-instance v0, Ljava/lang/Object;
++ 
++     invoke-direct {v0}, Ljava/lang/Object;-><init>()V
++ 
+      iput-object v0, p0, Lcom/android/internal/policy/impl/PhoneWindowManager;->mServiceAquireLock:Ljava/lang/Object;
+  
+      iput-boolean v7, p0, Lcom/android/internal/policy/impl/PhoneWindowManager;->mEnableShiftMenuBugReports:Z
+***************
+*** 4607,4612 ****
+--- 4615,4626 ----
+  
+      move-result p3
+  
++     invoke-virtual/range {p0 .. p1}, Lcom/android/internal/policy/impl/PhoneWindowManager;->getExtraSystemUiVisibility(Landroid/view/WindowManagerPolicy$WindowState;)I
++ 
++     move-result v18
++ 
++     or-int p3, p3, v18
++ 
+      return p3
+  
+      .end local v4    # "denyTransientNav":Z
+***************
+*** 7839,7844 ****
+--- 7853,7868 ----
+      return-void
+  .end method
+  
++ .method callInterceptPowerKeyUp(Z)V
++     .locals 0
++     .param p1, "canceled"    # Z
++ 
++     .prologue
++     invoke-direct {p0, p1}, Lcom/android/internal/policy/impl/PhoneWindowManager;->interceptPowerKeyUp(Z)Z
++ 
++     return-void
++ .end method
++ 
+  .method public canBeForceHidden(Landroid/view/WindowManagerPolicy$WindowState;Landroid/view/WindowManager$LayoutParams;)Z
+      .locals 1
+      .param p1, "win"    # Landroid/view/WindowManagerPolicy$WindowState;
+***************
+*** 10361,10366 ****
+--- 10385,10400 ----
+      return-void
+  .end method
+  
++ .method getExtraSystemUiVisibility(Landroid/view/WindowManagerPolicy$WindowState;)I
++     .locals 1
++     .param p1, "win"    # Landroid/view/WindowManagerPolicy$WindowState;
++ 
++     .prologue
++     const/4 v0, 0x0
++ 
++     return v0
++ .end method
++ 
+  .method public getMaxWallpaperLayer()I
+      .locals 1
+  
+***************
+*** 10435,10440 ****
+--- 10469,10492 ----
+      return p1
+  .end method
+  
++ .method getPowerLongPress()Ljava/lang/Runnable;
++     .locals 1
++ 
++     .prologue
++     iget-object v0, p0, Lcom/android/internal/policy/impl/PhoneWindowManager;->mPowerLongPress:Ljava/lang/Runnable;
++ 
++     return-object v0
++ .end method
++ 
++ .method getScreenshotChordLongPress()Ljava/lang/Runnable;
++     .locals 1
++ 
++     .prologue
++     iget-object v0, p0, Lcom/android/internal/policy/impl/PhoneWindowManager;->mScreenshotRunnable:Ljava/lang/Runnable;
++ 
++     return-object v0
++ .end method
++ 
+  .method getStatusBarService()Lcom/android/internal/statusbar/IStatusBarService;
+      .locals 2
+  
+***************
+*** 14889,14894 ****
+--- 14941,14947 ----
+      .local v9, "hungUp":Z
+      if-eqz v19, :cond_11
+  
++     if-eqz p3, :cond_11
+      :try_start_1
+      invoke-interface/range {v19 .. v19}, Lcom/android/internal/telephony/ITelephony;->endCall()Z
+      :try_end_1
+***************
+*** 16451,16456 ****
+--- 16504,16550 ----
+      invoke-virtual/range {v3 .. v13}, Lcom/android/internal/policy/impl/PhoneWindowManager;->setAttachedWindowFrames(Landroid/view/WindowManagerPolicy$WindowState;IILandroid/view/WindowManagerPolicy$WindowState;ZLandroid/graphics/Rect;Landroid/graphics/Rect;Landroid/graphics/Rect;Landroid/graphics/Rect;Landroid/graphics/Rect;)V
+  
+      :goto_3
++     move-object/from16 v0, p2
++ 
++     iget v3, v0, Landroid/view/WindowManager$LayoutParams;->type:I
++ 
++     const/16 v4, 0x7e1
++ 
++     if-ne v3, v4, :cond_miui_0
++ 
++     move-object/from16 v0, p2
++ 
++     iget v3, v0, Landroid/view/WindowManager$LayoutParams;->flags:I
++ 
++     and-int/lit16 v3, v3, 0x100
++ 
++     if-nez v3, :cond_miui_1
++ 
++     :cond_miui_0
++     move-object/from16 v0, p2
++ 
++     iget v3, v0, Landroid/view/WindowManager$LayoutParams;->type:I
++ 
++     const/4 v4, 0x3
++ 
++     if-ne v3, v4, :cond_miui_2
++ 
++     :cond_miui_1
++     const/4 v3, 0x0
++ 
++     iput v3, v14, Landroid/graphics/Rect;->top:I
++ 
++     iput v3, v13, Landroid/graphics/Rect;->top:I
++ 
++     iput v3, v12, Landroid/graphics/Rect;->top:I
++ 
++     iput v3, v11, Landroid/graphics/Rect;->top:I
++ 
++     iput v3, v10, Landroid/graphics/Rect;->top:I
++ 
++     iput v3, v9, Landroid/graphics/Rect;->top:I
++ 
++     :cond_miui_2
+      and-int/lit16 v3, v5, 0x200
+  
+      if-eqz v3, :cond_3
+***************
+*** 18592,18597 ****
+--- 18686,18700 ----
+      return v0
+  .end method
+  
++ .method public notifyBackLidSwitchChanged(JZ)V
++     .locals 0
++     .param p1, "whenNanos"    # J
++     .param p3, "lidOpen"    # Z
++ 
++     .prologue
++     return-void
++ .end method
++ 
+  .method public notifyLidSwitchChanged(JZ)V
+      .locals 6
+      .param p1, "whenNanos"    # J
+***************
+*** 20877,20882 ****
+--- 20980,20995 ----
+      return-void
+  .end method
+  
++ .method setPowerLongPress(Ljava/lang/Runnable;)V
++     .locals 0
++     .param p1, "value"    # Ljava/lang/Runnable;
++ 
++     .prologue
++     iput-object p1, p0, Lcom/android/internal/policy/impl/PhoneWindowManager;->mPowerLongPress:Ljava/lang/Runnable;
++ 
++     return-void
++ .end method
++ 
+  .method public setRotationLw(I)V
+      .locals 1
+      .param p1, "rotation"    # I
+***************
+*** 20994,21012 ****
+      .locals 5
+  
+      .prologue
+!     iget-object v1, p0, Lcom/android/internal/policy/impl/PhoneWindowManager;->mGlobalActions:Lcom/android/internal/policy/impl/GlobalActions;
+  
+      if-nez v1, :cond_0
+  
+!     new-instance v1, Lcom/android/internal/policy/impl/GlobalActions;
+  
+      iget-object v2, p0, Lcom/android/internal/policy/impl/PhoneWindowManager;->mContext:Landroid/content/Context;
+  
+      iget-object v3, p0, Lcom/android/internal/policy/impl/PhoneWindowManager;->mWindowManagerFuncs:Landroid/view/WindowManagerPolicy$WindowManagerFuncs;
+  
+!     invoke-direct {v1, v2, v3}, Lcom/android/internal/policy/impl/GlobalActions;-><init>(Landroid/content/Context;Landroid/view/WindowManagerPolicy$WindowManagerFuncs;)V
+  
+!     iput-object v1, p0, Lcom/android/internal/policy/impl/PhoneWindowManager;->mGlobalActions:Lcom/android/internal/policy/impl/GlobalActions;
+  
+      :cond_0
+      invoke-direct {p0}, Lcom/android/internal/policy/impl/PhoneWindowManager;->getKeyguardManager()Landroid/app/KeyguardManager;
+--- 21107,21125 ----
+      .locals 5
+  
+      .prologue
+!     iget-object v1, p0, Lcom/android/internal/policy/impl/PhoneWindowManager;->mGlobalActions:Lcom/android/internal/policy/impl/MiuiGlobalActions;
+  
+      if-nez v1, :cond_0
+  
+!     new-instance v1, Lcom/android/internal/policy/impl/MiuiGlobalActions;
+  
+      iget-object v2, p0, Lcom/android/internal/policy/impl/PhoneWindowManager;->mContext:Landroid/content/Context;
+  
+      iget-object v3, p0, Lcom/android/internal/policy/impl/PhoneWindowManager;->mWindowManagerFuncs:Landroid/view/WindowManagerPolicy$WindowManagerFuncs;
+  
+!     invoke-direct {v1, v2, v3}, Lcom/android/internal/policy/impl/MiuiGlobalActions;-><init>(Landroid/content/Context;Landroid/view/WindowManagerPolicy$WindowManagerFuncs;)V
+  
+!     iput-object v1, p0, Lcom/android/internal/policy/impl/PhoneWindowManager;->mGlobalActions:Lcom/android/internal/policy/impl/MiuiGlobalActions;
+  
+      :cond_0
+      invoke-direct {p0}, Lcom/android/internal/policy/impl/PhoneWindowManager;->getKeyguardManager()Landroid/app/KeyguardManager;
+***************
+*** 21018,21030 ****
+      move-result v0
+  
+      .local v0, "keyguardLocked":Z
+!     iget-object v1, p0, Lcom/android/internal/policy/impl/PhoneWindowManager;->mGlobalActions:Lcom/android/internal/policy/impl/GlobalActions;
+  
+      invoke-virtual {p0}, Lcom/android/internal/policy/impl/PhoneWindowManager;->isDeviceProvisioned()Z
+  
+      move-result v2
+  
+!     invoke-virtual {v1, v0, v2}, Lcom/android/internal/policy/impl/GlobalActions;->showDialog(ZZ)V
+  
+      if-eqz v0, :cond_1
+  
+--- 21131,21143 ----
+      move-result v0
+  
+      .local v0, "keyguardLocked":Z
+!     iget-object v1, p0, Lcom/android/internal/policy/impl/PhoneWindowManager;->mGlobalActions:Lcom/android/internal/policy/impl/MiuiGlobalActions;
+  
+      invoke-virtual {p0}, Lcom/android/internal/policy/impl/PhoneWindowManager;->isDeviceProvisioned()Z
+  
+      move-result v2
+  
+!     invoke-virtual {v1, v0, v2}, Lcom/android/internal/policy/impl/MiuiGlobalActions;->showDialog(ZZ)V
+  
+      if-eqz v0, :cond_1
+  

@@ -1,0 +1,17 @@
+*** ./smali/android/app/LoadedApk.smali	2015-08-27 23:29:03.019027797 +0800
+--- /home/nian/patchrom/m7/temp/new_smali/framework.jar.out/./smali/android/app/LoadedApk.smali	2015-08-27 23:30:17.863026801 +0800
+***************
+*** 1841,1846 ****
+--- 1841,1852 ----
+  
+      iput-object v0, p0, Landroid/app/LoadedApk;->mResources:Landroid/content/res/Resources;
+  
++     iget-object v0, p0, Landroid/app/LoadedApk;->mResources:Landroid/content/res/Resources;
++ 
++     iget-object v1, p0, Landroid/app/LoadedApk;->mPackageName:Ljava/lang/String;
++ 
++     invoke-static {v0, v1}, Landroid/miui/ResourcesManager;->initMiuiResource(Landroid/content/res/Resources;Ljava/lang/String;)V
++ 
+      :cond_0
+      iget-object v0, p0, Landroid/app/LoadedApk;->mResources:Landroid/content/res/Resources;
+  

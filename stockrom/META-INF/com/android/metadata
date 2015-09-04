@@ -1,0 +1,3 @@
+post-build=htc/m7_google/m7:4.4.3/KTU84L.H4/347097:user/release-keys
+post-timestamp=1440618215
+pre-device=m7

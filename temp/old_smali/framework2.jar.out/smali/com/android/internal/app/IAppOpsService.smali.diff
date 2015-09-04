@@ -1,0 +1,82 @@
+*** ./smali/com/android/internal/app/IAppOpsService.smali	2015-08-27 23:29:13.255027661 +0800
+--- /home/nian/patchrom/m7/temp/new_smali/framework2.jar.out/./smali/com/android/internal/app/IAppOpsService.smali	2015-08-27 23:30:32.119026611 +0800
+***************
+*** 23,28 ****
+--- 23,36 ----
+      .end annotation
+  .end method
+  
++ .method public abstract checkOperationInternal(IILjava/lang/String;)I
++     .annotation system Ldalvik/annotation/Throws;
++         value = {
++             Landroid/os/RemoteException;
++         }
++     .end annotation
++ .end method
++ 
+  .method public abstract checkPackage(ILjava/lang/String;)I
+      .annotation system Ldalvik/annotation/Throws;
+          value = {
+***************
+*** 77,83 ****
+      .end annotation
+  .end method
+  
+! .method public abstract getPrivacyGuardSettingForPackage(ILjava/lang/String;)Z
+      .annotation system Ldalvik/annotation/Throws;
+          value = {
+              Landroid/os/RemoteException;
+--- 85,91 ----
+      .end annotation
+  .end method
+  
+! .method public abstract getToken(Landroid/os/IBinder;)Landroid/os/IBinder;
+      .annotation system Ldalvik/annotation/Throws;
+          value = {
+              Landroid/os/RemoteException;
+***************
+*** 85,91 ****
+      .end annotation
+  .end method
+  
+! .method public abstract getToken(Landroid/os/IBinder;)Landroid/os/IBinder;
+      .annotation system Ldalvik/annotation/Throws;
+          value = {
+              Landroid/os/RemoteException;
+--- 93,99 ----
+      .end annotation
+  .end method
+  
+! .method public abstract registerCallback(Lcom/android/internal/app/IOpsCallback;)I
+      .annotation system Ldalvik/annotation/Throws;
+          value = {
+              Landroid/os/RemoteException;
+***************
+*** 109,134 ****
+      .end annotation
+  .end method
+  
+- .method public abstract resetCounters()V
+-     .annotation system Ldalvik/annotation/Throws;
+-         value = {
+-             Landroid/os/RemoteException;
+-         }
+-     .end annotation
+- .end method
+- 
+  .method public abstract setMode(IILjava/lang/String;I)V
+      .annotation system Ldalvik/annotation/Throws;
+          value = {
+              Landroid/os/RemoteException;
+-         }
+-     .end annotation
+- .end method
+- 
+- .method public abstract setPrivacyGuardSettingForPackage(ILjava/lang/String;Z)V
+-     .annotation system Ldalvik/annotation/Throws;
+-         value = {
+-             Landroid/os/RemoteException;
+          }
+      .end annotation
+  .end method
+--- 117,126 ----

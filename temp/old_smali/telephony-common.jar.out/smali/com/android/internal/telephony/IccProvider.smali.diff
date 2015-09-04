@@ -1,0 +1,34 @@
+*** ./smali/com/android/internal/telephony/IccProvider.smali	2015-08-27 23:28:02.059028609 +0800
+--- /home/nian/patchrom/m7/temp/new_smali/telephony-common.jar.out/./smali/com/android/internal/telephony/IccProvider.smali	2015-08-27 23:29:29.867027440 +0800
+***************
+*** 4,10 ****
+  
+  
+  # static fields
+! .field protected static final ADDRESS_BOOK_COLUMN_NAMES:[Ljava/lang/String;
+  
+  .field private static final ADN:I = 0x1
+  
+--- 4,10 ----
+  
+  
+  # static fields
+! .field public static final ADDRESS_BOOK_COLUMN_NAMES:[Ljava/lang/String;
+  
+  .field private static final ADN:I = 0x1
+  
+***************
+*** 76,81 ****
+--- 76,87 ----
+  
+      aput-object v2, v0, v1
+  
++     const/4 v1, 0x4
++ 
++     const-string v2, "anr"
++ 
++     aput-object v2, v0, v1
++ 
+      sput-object v0, Lcom/android/internal/telephony/IccProvider;->ADDRESS_BOOK_COLUMN_NAMES:[Ljava/lang/String;
+  
+      new-instance v0, Landroid/content/UriMatcher;

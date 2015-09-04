@@ -1,0 +1,19 @@
+*** ./smali/com/android/server/display/WifiDisplayController.smali	2015-08-27 23:27:48.971028783 +0800
+--- /home/nian/patchrom/m7/temp/new_smali/services.jar.out/./smali/com/android/server/display/WifiDisplayController.smali	2015-08-27 23:29:19.319027580 +0800
+***************
+*** 2106,2112 ****
+  
+      iput-object v0, v7, Landroid/net/wifi/p2p/WifiP2pConfig;->deviceAddress:Ljava/lang/String;
+  
+!     const/4 v0, 0x0
+  
+      iput v0, v7, Landroid/net/wifi/p2p/WifiP2pConfig;->groupOwnerIntent:I
+  
+--- 2106,2112 ----
+  
+      iput-object v0, v7, Landroid/net/wifi/p2p/WifiP2pConfig;->deviceAddress:Ljava/lang/String;
+  
+!     const/16 v0, 0xf
+  
+      iput v0, v7, Landroid/net/wifi/p2p/WifiP2pConfig;->groupOwnerIntent:I
+  

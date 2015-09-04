@@ -1,0 +1,347 @@
+*** ./smali/com/android/server/am/ActivityStack.smali	2015-08-27 23:27:56.795028679 +0800
+--- /home/nian/patchrom/m7/temp/new_smali/services.jar.out/./smali/com/android/server/am/ActivityStack.smali	2015-08-27 23:29:25.567027497 +0800
+***************
+*** 725,745 ****
+      iput-wide v3, p1, Lcom/android/server/am/ActivityRecord;->cpuTimeAtResume:J
+  
+      monitor-exit v2
+-     :try_end_0
+-     .catchall {:try_start_0 .. :try_end_0} :catchall_0
+  
+      :goto_0
+-     invoke-direct {p0, p1}, Lcom/android/server/am/ActivityStack;->updatePrivacyGuardNotificationLocked(Lcom/android/server/am/ActivityRecord;)V
+- 
+      return-void
+  
+      :catchall_0
+      move-exception v1
+  
+-     :try_start_1
+      monitor-exit v2
+!     :try_end_1
+!     .catchall {:try_start_1 .. :try_end_1} :catchall_0
+  
+      throw v1
+  
+--- 725,740 ----
+      iput-wide v3, p1, Lcom/android/server/am/ActivityRecord;->cpuTimeAtResume:J
+  
+      monitor-exit v2
+  
+      :goto_0
+      return-void
+  
+      :catchall_0
+      move-exception v1
+  
+      monitor-exit v2
+!     :try_end_0
+!     .catchall {:try_start_0 .. :try_end_0} :catchall_0
+  
+      throw v1
+  
+***************
+*** 1613,1745 ****
+      return-void
+  .end method
+  
+! .method private stopFullyDrawnTraceIfNeeded()V
+!     .locals 6
+  
+      .prologue
+!     const-wide/16 v4, 0x0
+! 
+!     iget-wide v0, p0, Lcom/android/server/am/ActivityStack;->mFullyDrawnStartTime:J
+! 
+!     cmp-long v0, v0, v4
+! 
+!     if-eqz v0, :cond_0
+! 
+!     iget-wide v0, p0, Lcom/android/server/am/ActivityStack;->mLaunchStartTime:J
+! 
+!     cmp-long v0, v0, v4
+! 
+!     if-nez v0, :cond_0
+  
+!     const-wide/16 v0, 0x40
+  
+!     const-string v2, "drawing"
+  
+!     const/4 v3, 0x0
+  
+!     invoke-static {v0, v1, v2, v3}, Landroid/os/Trace;->asyncTraceEnd(JLjava/lang/String;I)V
+  
+!     iput-wide v4, p0, Lcom/android/server/am/ActivityStack;->mFullyDrawnStartTime:J
+  
+!     :cond_0
+!     return-void
+! .end method
+  
+! .method private final updatePrivacyGuardNotificationLocked(Lcom/android/server/am/ActivityRecord;)V
+!     .locals 6
+!     .param p1, "next"    # Lcom/android/server/am/ActivityRecord;
+  
+!     .prologue
+!     iget-object v3, p0, Lcom/android/server/am/ActivityStack;->mStackSupervisor:Lcom/android/server/am/ActivityStackSupervisor;
+  
+!     iget-object v2, v3, Lcom/android/server/am/ActivityStackSupervisor;->mPrivacyGuardPackageName:Ljava/lang/String;
+  
+!     .local v2, "privacyGuardPackageName":Ljava/lang/String;
+!     if-eqz v2, :cond_1
+  
+!     iget-object v3, p1, Lcom/android/server/am/ActivityRecord;->packageName:Ljava/lang/String;
+  
+!     invoke-virtual {v2, v3}, Ljava/lang/String;->equals(Ljava/lang/Object;)Z
+  
+!     move-result v3
+  
+!     if-eqz v3, :cond_1
+  
+      :cond_0
+!     :goto_0
+!     return-void
+  
+!     :cond_1
+!     iget-object v3, p0, Lcom/android/server/am/ActivityStack;->mService:Lcom/android/server/am/ActivityManagerService;
+! 
+!     iget-object v3, v3, Lcom/android/server/am/ActivityManagerService;->mAppOpsService:Lcom/android/server/AppOpsService;
+  
+!     iget-object v4, p1, Lcom/android/server/am/ActivityRecord;->app:Lcom/android/server/am/ProcessRecord;
+  
+!     iget v4, v4, Lcom/android/server/am/ProcessRecord;->uid:I
+  
+!     iget-object v5, p1, Lcom/android/server/am/ActivityRecord;->packageName:Ljava/lang/String;
+  
+!     invoke-virtual {v3, v4, v5}, Lcom/android/server/AppOpsService;->getPrivacyGuardSettingForPackage(ILjava/lang/String;)Z
+  
+!     move-result v1
+  
+!     .local v1, "privacy":Z
+!     if-eqz v2, :cond_2
+! 
+!     if-nez v1, :cond_2
+  
+!     iget-object v3, p0, Lcom/android/server/am/ActivityStack;->mService:Lcom/android/server/am/ActivityManagerService;
+  
+!     iget-object v3, v3, Lcom/android/server/am/ActivityManagerService;->mHandler:Landroid/os/Handler;
+  
+!     const/16 v4, 0x29
+  
+!     iget v5, p1, Lcom/android/server/am/ActivityRecord;->userId:I
+  
+!     invoke-static {v5}, Ljava/lang/Integer;->valueOf(I)Ljava/lang/Integer;
+  
+!     move-result-object v5
+  
+!     invoke-virtual {v3, v4, v5}, Landroid/os/Handler;->obtainMessage(ILjava/lang/Object;)Landroid/os/Message;
+  
+      move-result-object v0
+  
+!     .local v0, "msg":Landroid/os/Message;
+!     invoke-virtual {v0}, Landroid/os/Message;->sendToTarget()V
+! 
+!     iget-object v3, p0, Lcom/android/server/am/ActivityStack;->mStackSupervisor:Lcom/android/server/am/ActivityStackSupervisor;
+  
+!     const/4 v4, 0x0
+  
+!     iput-object v4, v3, Lcom/android/server/am/ActivityStackSupervisor;->mPrivacyGuardPackageName:Ljava/lang/String;
+  
+!     goto :goto_0
+  
+!     .end local v0    # "msg":Landroid/os/Message;
+!     :cond_2
+!     if-eqz v1, :cond_0
+  
+!     iget-object v3, p0, Lcom/android/server/am/ActivityStack;->mService:Lcom/android/server/am/ActivityManagerService;
+  
+!     iget-object v3, v3, Lcom/android/server/am/ActivityManagerService;->mHandler:Landroid/os/Handler;
+  
+!     const/16 v4, 0x28
+  
+!     invoke-virtual {v3, v4, p1}, Landroid/os/Handler;->obtainMessage(ILjava/lang/Object;)Landroid/os/Message;
+  
+!     move-result-object v0
+  
+!     .restart local v0    # "msg":Landroid/os/Message;
+!     invoke-virtual {v0}, Landroid/os/Message;->sendToTarget()V
+  
+!     iget-object v3, p0, Lcom/android/server/am/ActivityStack;->mStackSupervisor:Lcom/android/server/am/ActivityStackSupervisor;
+  
+!     iget-object v4, p1, Lcom/android/server/am/ActivityRecord;->packageName:Ljava/lang/String;
+  
+!     iput-object v4, v3, Lcom/android/server/am/ActivityStackSupervisor;->mPrivacyGuardPackageName:Ljava/lang/String;
+  
+!     goto :goto_0
+  .end method
+  
+  
+--- 1608,1717 ----
+      return-void
+  .end method
+  
+! .method private startPausingLocked_Middle(Lcom/android/server/am/ActivityRecord;)V
+!     .locals 2
+!     .param p1, "prev"    # Lcom/android/server/am/ActivityRecord;
+  
+      .prologue
+!     iget-object v0, p0, Lcom/android/server/am/ActivityStack;->mWindowManager:Lcom/android/server/wm/WindowManagerService;
+  
+!     invoke-virtual {v0}, Lcom/android/server/wm/WindowManagerService;->getFocusedWindowType()I
+  
+!     move-result v0
+  
+!     const/16 v1, 0x7d0
+  
+!     if-eq v0, v1, :cond_1
+  
+!     iget-object v0, p1, Lcom/android/server/am/ActivityRecord;->task:Lcom/android/server/am/TaskRecord;
+  
+!     iget-object v0, v0, Lcom/android/server/am/TaskRecord;->intent:Landroid/content/Intent;
+  
+!     if-eqz v0, :cond_0
+  
+!     iget-object v0, p1, Lcom/android/server/am/ActivityRecord;->task:Lcom/android/server/am/TaskRecord;
+  
+!     iget-object v0, v0, Lcom/android/server/am/TaskRecord;->intent:Landroid/content/Intent;
+  
+!     invoke-virtual {v0}, Landroid/content/Intent;->getFlags()I
+  
+!     move-result v0
+  
+!     const/high16 v1, 0x800000
+  
+!     and-int/2addr v0, v1
+  
+!     if-nez v0, :cond_1
+  
+      :cond_0
+!     iget-object v1, p0, Lcom/android/server/am/ActivityStack;->mContext:Landroid/content/Context;
+  
+!     iget-object v0, p1, Lcom/android/server/am/ActivityRecord;->task:Lcom/android/server/am/TaskRecord;
+  
+!     iget-object v0, v0, Lcom/android/server/am/TaskRecord;->origActivity:Landroid/content/ComponentName;
+  
+!     if-eqz v0, :cond_2
+  
+!     iget-object v0, p1, Lcom/android/server/am/ActivityRecord;->task:Lcom/android/server/am/TaskRecord;
+  
+!     iget-object v0, v0, Lcom/android/server/am/TaskRecord;->origActivity:Landroid/content/ComponentName;
+  
+!     invoke-virtual {v0}, Landroid/content/ComponentName;->flattenToShortString()Ljava/lang/String;
+  
+!     move-result-object v0
+  
+!     :goto_0
+!     invoke-static {v1, v0}, Lmiui/util/ScreenshotUtils;->captureActivityScreenshot(Landroid/content/Context;Ljava/lang/String;)V
+  
+!     :cond_1
+!     return-void
+  
+!     :cond_2
+!     iget-object v0, p1, Lcom/android/server/am/ActivityRecord;->task:Lcom/android/server/am/TaskRecord;
+  
+!     iget-object v0, v0, Lcom/android/server/am/TaskRecord;->intent:Landroid/content/Intent;
+  
+!     invoke-virtual {v0}, Landroid/content/Intent;->getComponent()Landroid/content/ComponentName;
+  
+!     move-result-object v0
+  
+!     invoke-virtual {v0}, Landroid/content/ComponentName;->flattenToShortString()Ljava/lang/String;
+  
+      move-result-object v0
+  
+!     goto :goto_0
+! .end method
+  
+! .method private stopFullyDrawnTraceIfNeeded()V
+!     .locals 6
+  
+!     .prologue
+!     const-wide/16 v4, 0x0
+  
+!     iget-wide v0, p0, Lcom/android/server/am/ActivityStack;->mFullyDrawnStartTime:J
+  
+!     cmp-long v0, v0, v4
+  
+!     if-eqz v0, :cond_0
+  
+!     iget-wide v0, p0, Lcom/android/server/am/ActivityStack;->mLaunchStartTime:J
+  
+!     cmp-long v0, v0, v4
+  
+!     if-nez v0, :cond_0
+  
+!     const-wide/16 v0, 0x40
+  
+!     const-string v2, "drawing"
+  
+!     const/4 v3, 0x0
+  
+!     invoke-static {v0, v1, v2, v3}, Landroid/os/Trace;->asyncTraceEnd(JLjava/lang/String;I)V
+  
+!     iput-wide v4, p0, Lcom/android/server/am/ActivityStack;->mFullyDrawnStartTime:J
+  
+!     :cond_0
+!     return-void
+  .end method
+  
+  
+***************
+*** 3785,3790 ****
+--- 3757,3775 ----
+      goto :goto_0
+  
+      :cond_6
++     iget-object v5, p1, Lcom/android/server/am/ActivityRecord;->packageName:Ljava/lang/String;
++ 
++     invoke-static {v5, v0, v2, v1}, Landroid/app/MiuiThemeHelper;->canKeepActivityAlive(Ljava/lang/String;ILandroid/content/res/Configuration;Landroid/content/res/Configuration;)Z
++ 
++     move-result v5
++ 
++     if-eqz v5, :cond_miui_0
++ 
++     const/4 v5, 0x1
++ 
++     return v5
++ 
++     :cond_miui_0
+      iget-object v5, p1, Lcom/android/server/am/ActivityRecord;->info:Landroid/content/pm/ActivityInfo;
+  
+      invoke-virtual {v5}, Landroid/content/pm/ActivityInfo;->getRealConfigChanged()I
+***************
+*** 6465,6470 ****
+--- 6450,6459 ----
+      :cond_2
+      iget-object v9, p0, Lcom/android/server/am/ActivityStack;->mTaskHistory:Ljava/util/ArrayList;
+  
++     invoke-static {p0, v9, v8}, Lcom/android/server/am/ActivityStackInjector;->transferOnTopOfHomeForMoveTaskToBackLocked(Lcom/android/server/am/ActivityStack;Ljava/util/ArrayList;Lcom/android/server/am/TaskRecord;)V
++ 
++     iget-object v9, p0, Lcom/android/server/am/ActivityStack;->mTaskHistory:Ljava/util/ArrayList;
++ 
+      invoke-virtual {v9, v8}, Ljava/util/ArrayList;->remove(Ljava/lang/Object;)Z
+  
+      iget-object v9, p0, Lcom/android/server/am/ActivityStack;->mTaskHistory:Ljava/util/ArrayList;
+***************
+*** 6689,6694 ****
+--- 6678,6687 ----
+  
+      invoke-virtual {v3, v4}, Lcom/android/server/am/ActivityStackSupervisor;->moveHomeStack(Z)V
+  
++     iget-object v3, p0, Lcom/android/server/am/ActivityStack;->mTaskHistory:Ljava/util/ArrayList;
++ 
++     invoke-static {p0, v3, p1}, Lcom/android/server/am/ActivityStackInjector;->transferOnTopOfHomeForMoveTaskToFrontLocked(Lcom/android/server/am/ActivityStack;Ljava/util/ArrayList;Lcom/android/server/am/TaskRecord;)V
++ 
+      invoke-direct {p0, p1}, Lcom/android/server/am/ActivityStack;->insertTaskAtTop(Lcom/android/server/am/TaskRecord;)V
+  
+      if-eqz p2, :cond_4
+***************
+*** 11486,11491 ****
+--- 11479,11486 ----
+      if-eq v4, v6, :cond_4
+  
+      :cond_3
++     invoke-direct {p0, v3}, Lcom/android/server/am/ActivityStack;->startPausingLocked_Middle(Lcom/android/server/am/ActivityRecord;)V
++ 
+      invoke-virtual {p0, v3}, Lcom/android/server/am/ActivityStack;->screenshotActivities(Lcom/android/server/am/ActivityRecord;)Landroid/graphics/Bitmap;
+  
+      move-result-object v4
