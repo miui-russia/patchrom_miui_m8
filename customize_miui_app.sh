@@ -168,17 +168,10 @@ if [ $1 = "TeleService" ];then
 	add $1
 fi
 
-if [ $1 = "MiuiGallery" ];then
-    $XMLMERGYTOOL $1/res/values $2/res/values
-    $XMLMERGYTOOL $1/res/values-zh-rCN $2/res/values-zh-rCN
-fi
-
-if [ $1 = "MiuiHome" ];then
-    $XMLMERGYTOOL $1/res/values $2/res/values
-fi
-
 if [ $1 = "SecurityCenter" ];then
-	applyPatch $1 $2
+	#Root 5s > 2s
+	sed -i 0,/0x5/s//0x2/ $2/smali/com/miui/permcenter/root/RootApplyActivity.smali
+	sed -i 0,/0x5/s//0x1/ $2/smali/com/miui/permcenter/root/RootApplyActivity.smali
 	add $1
 fi
 
@@ -193,6 +186,7 @@ if [ $1 = "Settings" ];then
 	$XMLMERGYTOOL $1/res/values-zh-rCN $2/res/values-zh-rCN
     other/tools/idtoname.py other/tools/public-miui.xml $2/smali
     other/tools/nametoid.py framework-res/res/values/public.xml $2/smali
+	sed -i s/screen_buttons_timeout/button_backlight_timeout/g `grep screen_buttons_timeout -rl --include="*.smali" $2/smali/*`
 	add $1
 fi
 
@@ -211,8 +205,6 @@ if [ $1 = "DownloadProvider" ];then
     other/tools/nametoid.py framework-res/res/values/public.xml $2/smali
 	add $1
 fi
-
-
 
 if [ $1 = "AntiSpam" ];then
 	add $1
