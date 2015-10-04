@@ -1,0 +1,29 @@
+From d743be31d18c24ca6496a9384a8a14a82743a9df Mon Sep 17 00:00:00 2001
+From: jchjian <671346@qq.com>
+Date: Thu, 13 Aug 2015 01:19:24 +0800
+Subject: [PATCH 1/1] no regulate cpu info
+
+---
+ Settings/smali/com/android/settings/MiuiDeviceInfoSettings.smali | 4 ++++
+ 1 file changed, 4 insertions(+)
+
+--- a/Settings/smali/com/android/settings/MiuiDeviceInfoSettings.smali
++++ b/Settings/smali/com/android/settings/MiuiDeviceInfoSettings.smali
+@@ -581,10 +581,14 @@
+ 
+     move-result-object v3
+ 
++    const-string v3, "1.7"
++
+     invoke-virtual {v4, v3}, Ljava/lang/StringBuilder;->append(Ljava/lang/String;)Ljava/lang/StringBuilder;
+ 
+     move-result-object v3
+ 
++    const-string v2, "GHz"
++
+     invoke-virtual {v3, v2}, Ljava/lang/StringBuilder;->append(Ljava/lang/String;)Ljava/lang/StringBuilder;
+ 
+     move-result-object v2
+-- 
+1.9.1
+
